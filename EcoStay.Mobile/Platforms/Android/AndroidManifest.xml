@@ -5,6 +5,7 @@
 		android:icon="@mipmap/appicon" 
 		android:supportsRtl="true" 
 		android:label="EcoStay"
+		android:enableOnBackInvokedCallback="true"
 		android:usesCleartextTraffic="true">
 	</application>
 	<!-- Native Location Permissions (Android 13+ Compatible) -->

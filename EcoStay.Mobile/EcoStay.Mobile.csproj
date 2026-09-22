@@ -22,14 +22,23 @@
 
 		<!-- Android 13+ (API 33+) Compatible Target Framework -->
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+
+		<!-- Ensure all .NET assemblies & runtimes are bundled directly in the standalone APK -->
+		<EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+		<AndroidUseFastDeployment>false</AndroidUseFastDeployment>
+		<AndroidEnableFastDeployment>false</AndroidEnableFastDeployment>
+		<AndroidPackageFormat>apk</AndroidPackageFormat>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<!-- App Icon -->
+		<!-- App Icon (Original EcoStay Brand Logo) -->
 		<MauiIcon Include="Resources\AppIcon\appicon.png" />
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#2E7D32" BaseSize="128,128" />
+
+		<!-- Images & Vector Icons -->
+		<MauiImage Include="Resources\Images\*" />
 
 		<!-- Raw Assets (including configuration files) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
