@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- EcoStay Brand Palette -->
+    <Color x:Key="EcoPrimary">#2E7D32</Color>
+    <Color x:Key="EcoDark">#1B5E20</Color>
+    <Color x:Key="EcoLight">#E8F5E9</Color>
+    <Color x:Key="EcoEmerald">#10B981</Color>
+    <Color x:Key="EcoTeal">#0D9488</Color>
+    <Color x:Key="EcoLeaf">#4CAF50</Color>
+
+    <!-- Neutral & Background Palette -->
+    <Color x:Key="BackgroundPage">#F8FAF7</Color>
+    <Color x:Key="SurfaceWhite">#FFFFFF</Color>
+    <Color x:Key="SurfaceCard">#FFFFFF</Color>
+    <Color x:Key="SurfaceMuted">#F1F5F9</Color>
+    <Color x:Key="BorderLight">#E2E8F0</Color>
+    <Color x:Key="BorderEmerald">#A7F3D0</Color>
+
+    <!-- Text Palette -->
+    <Color x:Key="TextDark">#1E293B</Color>
+    <Color x:Key="TextBody">#334155</Color>
+    <Color x:Key="TextMuted">#64748B</Color>
+    <Color x:Key="TextLight">#94A3B8</Color>
+    <Color x:Key="TextInverse">#FFFFFF</Color>
+
+    <!-- Accent Badges -->
+    <Color x:Key="BadgeGold">#F59E0B</Color>
+    <Color x:Key="BadgeGoldBg">#FEF3C7</Color>
+    <Color x:Key="BadgeRose">#EF4444</Color>
+    <Color x:Key="BadgeRoseBg">#FEE2E2</Color>
+    <Color x:Key="BadgeSky">#0284C7</Color>
+    <Color x:Key="BadgeSkyBg">#E0F2FE</Color>
+    <Color x:Key="BadgePurple">#7C3AED</Color>
+    <Color x:Key="BadgePurpleBg">#EDE9FE</Color>
+
+    <!-- Solid Brushes -->
+    <SolidColorBrush x:Key="EcoPrimaryBrush" Color="{StaticResource EcoPrimary}" />
+    <SolidColorBrush x:Key="EcoDarkBrush" Color="{StaticResource EcoDark}" />
+    <SolidColorBrush x:Key="EcoLightBrush" Color="{StaticResource EcoLight}" />
+    <SolidColorBrush x:Key="BackgroundPageBrush" Color="{StaticResource BackgroundPage}" />
+    <SolidColorBrush x:Key="SurfaceWhiteBrush" Color="{StaticResource SurfaceWhite}" />
+    <SolidColorBrush x:Key="TextDarkBrush" Color="{StaticResource TextDark}" />
+    <SolidColorBrush x:Key="TextMutedBrush" Color="{StaticResource TextMuted}" />
+    <SolidColorBrush x:Key="BorderLightBrush" Color="{StaticResource BorderLight}" />
+
+</ResourceDictionary>

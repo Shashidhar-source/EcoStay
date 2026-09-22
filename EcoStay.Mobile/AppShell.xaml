@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="EcoStay.Mobile.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:EcoStay.Mobile.Views"
+    Title="EcoStay">
+
+    <TabBar>
+        <Tab Title="Home" Icon="home.png">
+            <ShellContent
+                Title="Home"
+                ContentTemplate="{DataTemplate views:HomePage}"
+                Route="home" />
+        </Tab>
+
+        <Tab Title="Explore" Icon="search.png">
+            <ShellContent
+                Title="Explore"
+                ContentTemplate="{DataTemplate views:ExplorePage}"
+                Route="explore" />
+        </Tab>
+
+        <Tab Title="Saved" Icon="heart.png">
+            <ShellContent
+                Title="Saved"
+                ContentTemplate="{DataTemplate views:WishlistPage}"
+                Route="wishlist" />
+        </Tab>
+
+        <Tab Title="Compare" Icon="compare.png">
+            <ShellContent
+                Title="Compare"
+                ContentTemplate="{DataTemplate views:ComparePage}"
+                Route="compare" />
+        </Tab>
+
+        <Tab Title="Dashboard" Icon="user.png">
+            <ShellContent
+                Title="Dashboard"
+                ContentTemplate="{DataTemplate views:DashboardPage}"
+                Route="dashboard" />
+        </Tab>
+    </TabBar>
+
+</Shell>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:EcoStay.Mobile.ViewModels"
+    x:Class="EcoStay.Mobile.Views.OnboardingPage"
+    x:DataType="viewmodels:OnboardingViewModel"
+    BackgroundColor="#F8FAF7">
+
+    <Grid RowDefinitions="*, Auto" Padding="24,36,24,28">
+        
+        <!-- Center Content Card -->
+        <ScrollView Grid.Row="0" VerticalOptions="Center">
+            <VerticalStackLayout Spacing="24" HorizontalOptions="Center" MaximumWidthRequest="400">
+                
+                <!-- Eco Logo / Icon Illustration -->
+                <Border 
+                    StrokeShape="RoundRectangle 36"
+                    BackgroundColor="#E8F5E9"
+                    StrokeThickness="0"
+                    WidthRequest="100"
+                    HeightRequest="100"
+                    HorizontalOptions="Center">
+                    <Label 
+                        Text="🌿" 
+                        FontSize="48" 
+                        HorizontalOptions="Center" 
+                        VerticalOptions="Center" />
+                </Border>
+
+                <!-- Titles -->
+                <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                    <Label 
+                        Text="ECOSTAY INDIA" 
+                        FontSize="12" 
+                        FontAttributes="Bold" 
+                        TextColor="{StaticResource EcoPrimary}" 
+                        HorizontalTextAlignment="Center" />
+
+                    <Label 
+                        Text="Stay Better.&#10;Travel Greener. 🌱" 
+                        FontSize="28" 
+                        FontAttributes="Bold" 
+                        TextColor="{StaticResource TextDark}" 
+                        HorizontalTextAlignment="Center" 
+                        LineHeight="1.2" />
+
+                    <Label 
+                        Text="Discover solar-powered resorts, organic coffee plantations, and farm-to-table dining across India with verified EcoScore." 
+                        FontSize="14" 
+                        TextColor="{StaticResource TextMuted}" 
+                        HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+
+                <!-- Why Location Permissions List -->
+                <Border 
+                    Style="{StaticResource EcoCardBorder}" 
+                    Padding="16" 
+                    BackgroundColor="#FFFFFF">
+                    <VerticalStackLayout Spacing="14">
+                        <Label 
+                            Text="Why EcoStay uses your location:" 
+                            FontSize="13" 
+                            FontAttributes="Bold" 
+                            TextColor="{StaticResource TextDark}" />
+
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="📍" FontSize="16" VerticalOptions="Center" />
+                            <Label Text="Find nearby verified solar and bio-lodges" FontSize="12" TextColor="{StaticResource TextBody}" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="🥗" FontSize="16" VerticalOptions="Center" />
+                            <Label Text="Locate organic &amp; pure vegetarian restaurants" FontSize="12" TextColor="{StaticResource TextBody}" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="🚗" FontSize="16" VerticalOptions="Center" />
+                            <Label Text="Calculate accurate travel time &amp; distance" FontSize="12" TextColor="{StaticResource TextBody}" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Bottom Action Buttons -->
+        <VerticalStackLayout Grid.Row="1" Spacing="10" MaximumWidthRequest="400" HorizontalOptions="Center" WidthRequest="340">
+            <Button 
+                Text="Continue &amp; Enable Location" 
+                Command="{Binding ContinueWithLocationCommand}"
+                Style="{StaticResource PrimaryEcoButton}"
+                HeightRequest="52"
+                FontSize="15" />
+
+            <Button 
+                Text="Search Manually" 
+                Command="{Binding SkipToSearchCommand}"
+                Style="{StaticResource OutlineEcoButton}"
+                HeightRequest="44"
+                FontSize="13" />
+        </VerticalStackLayout>
+
+    </Grid>
+
+</ContentPage>

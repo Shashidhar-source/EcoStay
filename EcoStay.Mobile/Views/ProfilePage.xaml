@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:EcoStay.Mobile.ViewModels"
+    x:Class="EcoStay.Mobile.Views.ProfilePage"
+    x:DataType="viewmodels:ProfileViewModel"
+    Title="Profile &amp; Settings">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="16" Padding="16">
+            
+            <!-- User Info -->
+            <Border Style="{StaticResource EcoCardBorder}" Padding="16">
+                <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                    <Border 
+                        StrokeShape="RoundRectangle 24" 
+                        StrokeThickness="0" 
+                        WidthRequest="80" 
+                        HeightRequest="80" 
+                        HorizontalOptions="Center">
+                        <Image Source="{Binding CurrentUser.AvatarUrl}" Aspect="AspectFill" />
+                    </Border>
+                    <Label Text="{Binding CurrentUser.Name}" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource TextDark}" HorizontalTextAlignment="Center" />
+                    <Label Text="{Binding CurrentUser.Email}" FontSize="12" TextColor="{StaticResource TextMuted}" HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- API Environment Configuration for Android / iOS / LAN -->
+            <Border Style="{StaticResource EcoCardBorder}" Padding="16">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="API Backend Configuration" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource TextDark}" />
+                    <Label Text="Live backend endpoint used by this client:" FontSize="11" TextColor="{StaticResource TextMuted}" />
+                    
+                    <Border StrokeShape="RoundRectangle 10" BackgroundColor="#F1F5F9" Padding="10,6">
+                        <Label Text="{Binding ActiveApiEndpoint}" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource EcoDark}" />
+                    </Border>
+
+                    <Label Text="Custom Base URL (optional for physical device LAN testing):" FontSize="11" TextColor="{StaticResource TextMuted}" Margin="0,6,0,0" />
+                    <Border StrokeShape="RoundRectangle 12" Stroke="{StaticResource BorderLight}" Padding="10,2">
+                        <Entry 
+                            Text="{Binding CustomApiUrl}" 
+                            Placeholder="http://192.168.1.X:5000" 
+                            FontSize="13" />
+                    </Border>
+
+                    <Grid ColumnDefinitions="*, *" ColumnSpacing="8" Margin="0,6,0,0">
+                        <Button 
+                            Grid.Column="0"
+                            Text="Save URL" 
+                            Command="{Binding SaveCustomApiUrlCommand}" 
+                            Style="{StaticResource PrimaryEcoButton}"
+                            HeightRequest="38"
+                            FontSize="12" />
+                        <Button 
+                            Grid.Column="1"
+                            Text="Reset Default" 
+                            Command="{Binding ResetApiUrlCommand}" 
+                            Style="{StaticResource OutlineEcoButton}"
+                            HeightRequest="38"
+                            FontSize="12" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Logout Button -->
+            <Button 
+                Text="Sign Out" 
+                Command="{Binding LogoutCommand}" 
+                BackgroundColor="#FEE2E2"
+                TextColor="#EF4444"
+                FontAttributes="Bold"
+                CornerRadius="16"
+                HeightRequest="44"
+                FontSize="13" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

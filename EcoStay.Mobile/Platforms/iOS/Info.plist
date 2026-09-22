@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDisplayName</key>
+	<string>EcoStay</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.ecostay.mobile</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>UIDeviceFamily</key>
+	<array>
+		<integer>1</integer>
+		<integer>2</integer>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<!-- Native Location Permission Descriptions -->
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>EcoStay requires location access to discover sustainable eco-stays and organic restaurants near you in India.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>EcoStay requires location access to discover sustainable eco-stays and organic restaurants near you in India.</string>
+</dict>
+</plist>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:EcoStay.Mobile.Components"
+    x:Class="EcoStay.Mobile.Components.SustainabilityCard">
+
+    <Border 
+        Style="{StaticResource EcoCardBorder}"
+        Padding="16"
+        Margin="0,0,0,16">
+        
+        <VerticalStackLayout Spacing="14">
+            
+            <!-- Header -->
+            <Grid ColumnDefinitions="*, Auto">
+                <VerticalStackLayout Grid.Column="0" Spacing="2">
+                    <Label 
+                        Text="GRIHA &amp; GSTC ALIGNED PROFILE" 
+                        FontSize="10" 
+                        FontAttributes="Bold" 
+                        TextColor="{StaticResource EcoPrimary}" />
+                    <Label 
+                        Text="Sustainability Breakdown" 
+                        FontSize="18" 
+                        FontAttributes="Bold" 
+                        TextColor="{StaticResource TextDark}" />
+                </VerticalStackLayout>
+
+                <components:EcoScoreBadge 
+                    Grid.Column="1" 
+                    Score="{Binding CalculatedEcoScore}" />
+            </Grid>
+
+            <!-- 6 Pillars Progress Meters -->
+            <VerticalStackLayout Spacing="10" Margin="0,6,0,0">
+                
+                <!-- Solar & Clean Energy (25%) -->
+                <VerticalStackLayout Spacing="4">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label Text="☀️ Renewable Solar &amp; Clean Energy" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource TextDark}" />
+                        <Label Grid.Column="1" Text="{Binding Sustainability.Solar, StringFormat='{0:0}%'}" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource EcoPrimary}" />
+                    </Grid>
+                    <ProgressBar Progress="{Binding Sustainability.SolarRatio}" ProgressColor="#F59E0B" HeightRequest="6" />
+                </VerticalStackLayout>
+
+                <!-- Water Conservation (20%) -->
+                <VerticalStackLayout Spacing="4">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label Text="💧 Rainwater &amp; Bawadi Conservation" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource TextDark}" />
+                        <Label Grid.Column="1" Text="{Binding Sustainability.WaterConservation, StringFormat='{0:0}%'}" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource EcoPrimary}" />
+                    </Grid>
+                    <ProgressBar Progress="{Binding Sustainability.WaterRatio}" ProgressColor="#0284C7" HeightRequest="6" />
+                </VerticalStackLayout>
+
+                <!-- Waste Management (20%) -->
+                <VerticalStackLayout Spacing="4">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label Text="♻️ Zero Plastic &amp; Bio-Composting" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource TextDark}" />
+                        <Label Grid.Column="1" Text="{Binding Sustainability.WasteManagement, StringFormat='{0:0}%'}" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource EcoPrimary}" />
+                    </Grid>
+                    <ProgressBar Progress="{Binding Sustainability.WasteRatio}" ProgressColor="#7C3AED" HeightRequest="6" />
+                </VerticalStackLayout>
+
+                <!-- Energy Efficiency (15%) -->
+                <VerticalStackLayout Spacing="4">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label Text="⚡ Passive Thermal &amp; LED Efficiency" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource TextDark}" />
+                        <Label Grid.Column="1" Text="{Binding Sustainability.EnergyEfficiency, StringFormat='{0:0}%'}" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource EcoPrimary}" />
+                    </Grid>
+                    <ProgressBar Progress="{Binding Sustainability.EnergyRatio}" ProgressColor="#10B981" HeightRequest="6" />
+                </VerticalStackLayout>
+
+                <!-- Local Community Support (10%) -->
+                <VerticalStackLayout Spacing="4">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label Text="🤝 Local Tribal &amp; Artisan Sourcing" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource TextDark}" />
+                        <Label Grid.Column="1" Text="{Binding Sustainability.LocalSupport, StringFormat='{0:0}%'}" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource EcoPrimary}" />
+                    </Grid>
+                    <ProgressBar Progress="{Binding Sustainability.LocalRatio}" ProgressColor="#0D9488" HeightRequest="6" />
+                </VerticalStackLayout>
+
+                <!-- Green Vernacular Construction (10%) -->
+                <VerticalStackLayout Spacing="4">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label Text="🌿 Vernacular Bamboo &amp; Mud Build" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource TextDark}" />
+                        <Label Grid.Column="1" Text="{Binding Sustainability.GreenConstruction, StringFormat='{0:0}%'}" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource EcoPrimary}" />
+                    </Grid>
+                    <ProgressBar Progress="{Binding Sustainability.ConstructionRatio}" ProgressColor="#166534" HeightRequest="6" />
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+
+    </Border>
+
+</ContentView>

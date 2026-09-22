@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:EcoStay.Mobile.ViewModels"
+    xmlns:components="clr-namespace:EcoStay.Mobile.Components"
+    xmlns:models="clr-namespace:EcoStay.Mobile.Models"
+    x:Class="EcoStay.Mobile.Views.ComparePage"
+    x:DataType="viewmodels:CompareViewModel"
+    Title="Side-by-Side Compare">
+
+    <Grid>
+        
+        <!-- Empty State -->
+        <VerticalStackLayout 
+            IsVisible="{Binding HasProperties, Converter={x:Static views:ComparePageConverters.InvertedBoolConverter}}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            Spacing="16" 
+            Padding="24">
+            <Label Text="⚖️" FontSize="48" HorizontalTextAlignment="Center" />
+            <Label Text="No Stays in Comparison" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource TextDark}" HorizontalTextAlignment="Center" />
+            <Label Text="Select 'Add to Compare' on up to 4 stays in India to analyze their EcoScore and features side-by-side." FontSize="13" TextColor="{StaticResource TextMuted}" HorizontalTextAlignment="Center" />
+            <Button 
+                Text="Explore Eco Stays" 
+                Command="{Binding NavigateToExploreCommand}" 
+                Style="{StaticResource PrimaryEcoButton}"
+                HorizontalOptions="Center"
+                Margin="0,10,0,0" />
+        </VerticalStackLayout>
+
+        <!-- Horizontal Comparison Cards -->
+        <ScrollView 
+            Orientation="Horizontal" 
+            IsVisible="{Binding HasProperties}">
+            <HorizontalStackLayout Spacing="16" Padding="16">
+                <CollectionView ItemsSource="{Binding ComparedProperties}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="16" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Accommodation">
+                            <Border 
+                                Style="{StaticResource EcoCardBorder}" 
+                                WidthRequest="280" 
+                                Padding="16">
+                                <ScrollView>
+                                    <VerticalStackLayout Spacing="12">
+                                        
+                                        <!-- Remove Button & Image -->
+                                        <Grid>
+                                            <Border StrokeShape="RoundRectangle 16" StrokeThickness="0" HeightRequest="140">
+                                                <Image Source="{Binding PrimaryImage}" Aspect="AspectFill" />
+                                            </Border>
+                                            <Button 
+                                                Text="✕" 
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:CompareViewModel}}, Path=RemovePropertyCommand}"
+                                                CommandParameter="{Binding .}"
+                                                BackgroundColor="#CC000000"
+                                                TextColor="#FFFFFF"
+                                                CornerRadius="16"
+                                                WidthRequest="32"
+                                                HeightRequest="32"
+                                                HorizontalOptions="End"
+                                                VerticalOptions="Start"
+                                                Margin="8"
+                                                Padding="0" />
+                                        </Grid>
+
+                                        <!-- Property Name & Location -->
+                                        <Label Text="{Binding Name}" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource TextDark}" MaxLines="2" />
+                                        <Label Text="{Binding Location}" FontSize="12" TextColor="{StaticResource TextMuted}" />
+
+                                        <!-- Price & EcoScore -->
+                                        <Grid ColumnDefinitions="*, Auto">
+                                            <Label Text="{Binding FormattedPriceWithUnit}" FontSize="14" FontAttributes="Bold" TextColor="{StaticResource TextDark}" VerticalOptions="Center" />
+                                            <components:EcoScoreBadge Grid.Column="1" Score="{Binding CalculatedEcoScore}" />
+                                        </Grid>
+
+                                        <BoxView HeightRequest="1" Color="{StaticResource BorderLight}" Margin="0,4" />
+
+                                        <!-- 6-Pillars Quick Metrics -->
+                                        <VerticalStackLayout Spacing="6">
+                                            <Label Text="☀️ Solar Energy" FontSize="11" TextColor="{StaticResource TextMuted}" />
+                                            <ProgressBar Progress="{Binding Sustainability.SolarRatio}" ProgressColor="#F59E0B" HeightRequest="4" />
+
+                                            <Label Text="💧 Water Harvesting" FontSize="11" TextColor="{StaticResource TextMuted}" />
+                                            <ProgressBar Progress="{Binding Sustainability.WaterRatio}" ProgressColor="#0284C7" HeightRequest="4" />
+
+                                            <Label Text="♻️ Zero Waste" FontSize="11" TextColor="{StaticResource TextMuted}" />
+                                            <ProgressBar Progress="{Binding Sustainability.WasteRatio}" ProgressColor="#7C3AED" HeightRequest="4" />
+
+                                            <Label Text="🤝 Community Support" FontSize="11" TextColor="{StaticResource TextMuted}" />
+                                            <ProgressBar Progress="{Binding Sustainability.LocalRatio}" ProgressColor="#0D9488" HeightRequest="4" />
+                                        </VerticalStackLayout>
+
+                                    </VerticalStackLayout>
+                                </ScrollView>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </HorizontalStackLayout>
+        </ScrollView>
+
+    </Grid>
+
+</ContentPage>

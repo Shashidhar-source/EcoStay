@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="EcoStay.Mobile.Components.RestaurantCard">
+
+    <Border 
+        Style="{StaticResource EcoCardBorder}"
+        Margin="0,0,0,14">
+        
+        <Grid RowDefinitions="160, Auto">
+            
+            <!-- Food Image -->
+            <Image 
+                Grid.Row="0"
+                Source="{Binding PrimaryImage}"
+                Aspect="AspectFill"
+                HeightRequest="160" />
+
+            <!-- Diet badge pill -->
+            <Border 
+                Grid.Row="0"
+                StrokeShape="RoundRectangle 8"
+                BackgroundColor="#EEFFFFFF"
+                Padding="8,4"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                Margin="12">
+                <Label 
+                    Text="{Binding DietBadgeLabel}" 
+                    FontSize="11" 
+                    FontAttributes="Bold" 
+                    TextColor="{StaticResource EcoDark}" />
+            </Border>
+
+            <!-- Card Bottom Body -->
+            <VerticalStackLayout Grid.Row="1" Padding="14" Spacing="6">
+                
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label 
+                        Grid.Column="0"
+                        Text="{Binding Name}" 
+                        FontSize="16" 
+                        FontAttributes="Bold" 
+                        TextColor="{StaticResource TextDark}" 
+                        MaxLines="1" 
+                        LineBreakMode="TailTruncation" />
+
+                    <HorizontalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
+                        <Label Text="★" TextColor="#F59E0B" FontSize="12" />
+                        <Label Text="{Binding FormattedRating}" TextColor="{StaticResource TextDark}" FontSize="12" FontAttributes="Bold" />
+                    </HorizontalStackLayout>
+                </Grid>
+
+                <Label 
+                    Text="{Binding FormattedCuisine}" 
+                    FontSize="12" 
+                    TextColor="{StaticResource TextMuted}" 
+                    MaxLines="1" />
+
+                <!-- Location & Distance -->
+                <Grid ColumnDefinitions="*, Auto" Margin="0,2,0,0">
+                    <Label 
+                        Grid.Column="0"
+                        Text="{Binding Address}" 
+                        FontSize="11" 
+                        TextColor="{StaticResource TextMuted}" 
+                        MaxLines="1" />
+
+                    <Border 
+                        Grid.Column="1"
+                        StrokeShape="RoundRectangle 6"
+                        BackgroundColor="#E0F2FE"
+                        Padding="6,2">
+                        <Label 
+                            Text="{Binding FormattedDistance}" 
+                            FontSize="10" 
+                            FontAttributes="Bold" 
+                            TextColor="#0284C7" />
+                    </Border>
+                </Grid>
+
+                <!-- Affordability and Cost per meal -->
+                <Grid ColumnDefinitions="Auto, *, Auto" Margin="0,4,0,0" VerticalOptions="Center">
+                    <Label 
+                        Grid.Column="0"
+                        Text="{Binding AffordabilityLabel}" 
+                        FontSize="11" 
+                        FontAttributes="Bold" 
+                        TextColor="{StaticResource EcoPrimary}" />
+
+                    <Label 
+                        Grid.Column="2"
+                        Text="{Binding FormattedAverageCost}" 
+                        FontSize="12" 
+                        FontAttributes="Bold" 
+                        TextColor="{StaticResource TextDark}" />
+                </Grid>
+
+            </VerticalStackLayout>
+
+        </Grid>
+
+    </Border>
+
+</ContentView>

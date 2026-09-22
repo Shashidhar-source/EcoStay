@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:EcoStay.Mobile.ViewModels"
+    x:Class="EcoStay.Mobile.Views.BookingPage"
+    x:DataType="viewmodels:BookingViewModel"
+    Title="Request Reservation">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="16" Padding="16">
+            
+            <!-- Stay Summary Card -->
+            <Border Style="{StaticResource EcoCardBorder}" Padding="14">
+                <Grid ColumnDefinitions="Auto, *">
+                    <Border 
+                        Grid.Column="0" 
+                        StrokeShape="RoundRectangle 12" 
+                        StrokeThickness="0" 
+                        WidthRequest="70" 
+                        HeightRequest="70" 
+                        Margin="0,0,12,0">
+                        <Image Source="{Binding Accommodation.PrimaryImage}" Aspect="AspectFill" />
+                    </Border>
+
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                        <Label Text="{Binding Accommodation.Name}" FontSize="15" FontAttributes="Bold" TextColor="{StaticResource TextDark}" MaxLines="1" />
+                        <Label Text="{Binding Accommodation.Location}" FontSize="12" TextColor="{StaticResource TextMuted}" />
+                        <Label Text="{Binding Accommodation.FormattedPriceWithUnit}" FontSize="13" FontAttributes="Bold" TextColor="{StaticResource EcoPrimary}" Margin="0,2,0,0" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <!-- Date Selection -->
+            <Border Style="{StaticResource EcoCardBorder}" Padding="16">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Reservation Dates" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource TextDark}" />
+                    
+                    <Grid ColumnDefinitions="*, *" ColumnSpacing="12">
+                        <VerticalStackLayout Grid.Column="0" Spacing="4">
+                            <Label Text="Check-in Date" FontSize="11" TextColor="{StaticResource TextMuted}" />
+                            <DatePicker Date="{Binding CheckInDate}" Format="dd MMM yyyy" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="1" Spacing="4">
+                            <Label Text="Check-out Date" FontSize="11" TextColor="{StaticResource TextMuted}" />
+                            <DatePicker Date="{Binding CheckOutDate}" Format="dd MMM yyyy" />
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <!-- Guests Counter -->
+                    <Grid ColumnDefinitions="*, Auto" Margin="0,6,0,0">
+                        <Label Text="Number of Guests" FontSize="13" TextColor="{StaticResource TextDark}" VerticalOptions="Center" />
+                        <Stepper Grid.Column="1" Value="{Binding GuestsCount}" Minimum="1" Maximum="10" Increment="1" />
+                    </Grid>
+                    <Label Text="{Binding GuestsCount, StringFormat='{0} Guests'}" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource EcoPrimary}" HorizontalOptions="End" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Special Note -->
+            <Border Style="{StaticResource EcoCardBorder}" Padding="16">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Special Requests (e.g. EV Charging, Sattvic meals)" FontSize="13" FontAttributes="Bold" TextColor="{StaticResource TextDark}" />
+                    <Editor Text="{Binding ContactNote}" Placeholder="Add request for the host..." HeightRequest="80" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Total Price Breakdown -->
+            <Border Style="{StaticResource EcoCardBorder}" BackgroundColor="#E8F5E9" Padding="16">
+                <VerticalStackLayout Spacing="8">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label Text="Total Estimated Price" FontSize="15" FontAttributes="Bold" TextColor="{StaticResource EcoDark}" />
+                        <Label Grid.Column="1" Text="{Binding TotalAmount, StringFormat='₹{0:N0}'}" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource EcoDark}" />
+                    </Grid>
+                    <Label Text="✓ 100% Guaranteed Carbon Offset Certificate Included" FontSize="11" TextColor="{StaticResource EcoDark}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Submit Button -->
+            <Button 
+                Text="Confirm &amp; Send Request" 
+                Command="{Binding ConfirmReservationCommand}"
+                Style="{StaticResource PrimaryEcoButton}"
+                HeightRequest="48" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

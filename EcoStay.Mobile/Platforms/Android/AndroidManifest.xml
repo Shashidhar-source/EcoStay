@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.ecostay.mobile">
+	<application 
+		android:allowBackup="true" 
+		android:icon="@mipmap/appicon" 
+		android:supportsRtl="true" 
+		android:label="EcoStay"
+		android:usesCleartextTraffic="true">
+	</application>
+	<!-- Native Location Permissions (Android 13+ Compatible) -->
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<!-- Native Haptics & Phone -->
+	<uses-permission android:name="android.permission.VIBRATE" />
+</manifest>

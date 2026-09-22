@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:EcoStay.Mobile.Components"
+    x:Class="EcoStay.Mobile.Components.AccommodationCard"
+    x:Name="ThisCard">
+
+    <Border 
+        Style="{StaticResource EcoCardBorder}"
+        Margin="0,0,0,14">
+        
+        <Grid RowDefinitions="180, Auto">
+            
+            <!-- Hero Image -->
+            <Image 
+                Grid.Row="0"
+                Source="{Binding PrimaryImage}"
+                Aspect="AspectFill"
+                HeightRequest="180" />
+
+            <!-- Top Floating Overlay: Property Type & Rating -->
+            <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto" Padding="12" VerticalOptions="Start">
+                <Border 
+                    Grid.Column="0"
+                    StrokeShape="RoundRectangle 8"
+                    BackgroundColor="#CCFFFFFF"
+                    Padding="6,3">
+                    <Label 
+                        Text="{Binding FormattedPropertyType}" 
+                        FontSize="10" 
+                        FontAttributes="Bold" 
+                        TextColor="{StaticResource EcoPrimary}" />
+                </Border>
+
+                <Border 
+                    Grid.Column="2"
+                    StrokeShape="RoundRectangle 8"
+                    BackgroundColor="#CC000000"
+                    Padding="6,3">
+                    <HorizontalStackLayout Spacing="4">
+                        <Label Text="★" TextColor="#F59E0B" FontSize="11" />
+                        <Label Text="{Binding FormattedRating}" TextColor="#FFFFFF" FontSize="11" FontAttributes="Bold" />
+                    </HorizontalStackLayout>
+                </Border>
+            </Grid>
+
+            <!-- Card Bottom Body -->
+            <VerticalStackLayout Grid.Row="1" Padding="14" Spacing="6">
+                
+                <Label 
+                    Text="{Binding Name}" 
+                    FontSize="16" 
+                    FontAttributes="Bold" 
+                    TextColor="{StaticResource TextDark}" 
+                    MaxLines="1" 
+                    LineBreakMode="TailTruncation" />
+
+                <Label 
+                    Text="{Binding Location}" 
+                    FontSize="12" 
+                    TextColor="{StaticResource TextMuted}" 
+                    MaxLines="1" />
+
+                <!-- EcoScore Badge + Price Row -->
+                <Grid ColumnDefinitions="Auto, *, Auto" Margin="0,4,0,0" VerticalOptions="Center">
+                    <components:EcoScoreBadge 
+                        Grid.Column="0" 
+                        Score="{Binding CalculatedEcoScore}" />
+
+                    <HorizontalStackLayout Grid.Column="2" VerticalOptions="Center" Spacing="2">
+                        <Label 
+                            Text="{Binding FormattedPrice}" 
+                            FontSize="16" 
+                            FontAttributes="Bold" 
+                            TextColor="{StaticResource TextDark}" />
+                        <Label 
+                            Text="/night" 
+                            FontSize="11" 
+                            TextColor="{StaticResource TextMuted}" 
+                            VerticalOptions="End" 
+                            Margin="0,0,0,1" />
+                    </HorizontalStackLayout>
+                </Grid>
+
+            </VerticalStackLayout>
+
+        </Grid>
+
+    </Border>
+
+</ContentView>

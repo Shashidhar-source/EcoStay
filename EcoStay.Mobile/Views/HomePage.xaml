@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:EcoStay.Mobile.ViewModels"
+    xmlns:components="clr-namespace:EcoStay.Mobile.Components"
+    xmlns:models="clr-namespace:EcoStay.Mobile.Models"
+    x:Class="EcoStay.Mobile.Views.HomePage"
+    x:DataType="viewmodels:HomeViewModel"
+    Title="🌿 EcoStay">
+
+    <RefreshView 
+        IsRefreshing="{Binding IsRefreshing}" 
+        Command="{Binding LoadDataCommand}" 
+        CommandParameter="{x:Boolean True}">
+        
+        <ScrollView>
+            <VerticalStackLayout Spacing="20" Padding="16">
+                
+                <!-- Offline Notice Banner if offline -->
+                <Border 
+                    IsVisible="{Binding IsOffline}"
+                    StrokeShape="RoundRectangle 12"
+                    BackgroundColor="#FEF3C7"
+                    Stroke="#FDE68A"
+                    Padding="12,8">
+                    <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                        <Label Text="📡" FontSize="14" VerticalOptions="Center" />
+                        <Label Text="You're offline. Showing verified saved eco-stays." FontSize="11" TextColor="#92400E" FontAttributes="Bold" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                </Border>
+
+                <!-- Hero Nature Banner -->
+                <Border 
+                    StrokeShape="RoundRectangle 24"
+                    StrokeThickness="0"
+                    BackgroundColor="#E8F5E9"
+                    Padding="20">
+                    <VerticalStackLayout Spacing="8">
+                        <Label 
+                            Text="STAY BETTER. TRAVEL GREENER. 🌱" 
+                            FontSize="11" 
+                            FontAttributes="Bold" 
+                            TextColor="{StaticResource EcoPrimary}" />
+                        
+                        <Label 
+                            Text="Find Sustainable Stays in India" 
+                            FontSize="22" 
+                            FontAttributes="Bold" 
+                            TextColor="{StaticResource TextDark}" />
+
+                        <Label 
+                            Text="Verified solar, water-saving, and zero-waste accommodations with transparent EcoScore." 
+                            FontSize="12" 
+                            TextColor="{StaticResource TextBody}" />
+
+                        <!-- Search Input in Hero -->
+                        <Border 
+                            StrokeShape="RoundRectangle 16"
+                            Stroke="{StaticResource BorderLight}"
+                            BackgroundColor="#FFFFFF"
+                            Padding="12,4"
+                            Margin="0,10,0,0">
+                            <Grid ColumnDefinitions="Auto, *, Auto">
+                                <Label Grid.Column="0" Text="📍" FontSize="16" VerticalOptions="Center" Margin="0,0,8,0" />
+                                <Entry 
+                                    Grid.Column="1" 
+                                    Text="{Binding SearchQuery}" 
+                                    Placeholder="Where in India? (e.g. Wayanad, Coorg)" 
+                                    FontSize="13" 
+                                    ReturnType="Search"
+                                    ReturnCommand="{Binding SearchCommand}"
+                                    VerticalOptions="Center" />
+                                <Button 
+                                    Grid.Column="2" 
+                                    Text="Search" 
+                                    Command="{Binding SearchCommand}" 
+                                    Style="{StaticResource PrimaryEcoButton}"
+                                    HeightRequest="36"
+                                    Padding="12,0"
+                                    FontSize="12" />
+                            </Grid>
+                        </Border>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Popular Destinations Carousel -->
+                <VerticalStackLayout Spacing="10">
+                    <Label 
+                        Text="Popular Eco Destinations" 
+                        FontSize="18" 
+                        FontAttributes="Bold" 
+                        TextColor="{StaticResource TextDark}" />
+
+                    <CollectionView 
+                        ItemsSource="{Binding PopularDestinations}"
+                        HeightRequest="140">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="12" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="viewmodels:PopularDestination">
+                                <Border 
+                                    StrokeShape="RoundRectangle 16"
+                                    StrokeThickness="0"
+                                    WidthRequest="150"
+                                    HeightRequest="130">
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}, Path=SelectDestinationCommand}"
+                                            CommandParameter="{Binding .}" />
+                                    </Border.GestureRecognizers>
+                                    <Grid>
+                                        <Image Source="{Binding ImageUrl}" Aspect="AspectFill" />
+                                        <BoxView Color="#77000000" VerticalOptions="Fill" />
+                                        <VerticalStackLayout VerticalOptions="End" Padding="10" Spacing="2">
+                                            <Label Text="{Binding Name}" FontSize="15" FontAttributes="Bold" TextColor="#FFFFFF" />
+                                            <Label Text="{Binding State}" FontSize="11" TextColor="#E2E8F0" />
+                                            <Label Text="{Binding StaysCount, StringFormat='{0} Eco Stays'}" FontSize="10" TextColor="#A7F3D0" FontAttributes="Bold" />
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+
+                <!-- Loading State Placeholder -->
+                <ActivityIndicator 
+                    IsRunning="{Binding IsBusy}" 
+                    IsVisible="{Binding IsBusy}" 
+                    Color="{StaticResource EcoPrimary}" 
+                    HeightRequest="40" />
+
+                <!-- Error State with Retry -->
+                <VerticalStackLayout 
+                    IsVisible="{Binding HasError}" 
+                    Spacing="8" 
+                    HorizontalOptions="Center" 
+                    Padding="16">
+                    <Label Text="⚠️" FontSize="28" HorizontalTextAlignment="Center" />
+                    <Label Text="{Binding ErrorMessage}" FontSize="12" TextColor="{StaticResource TextMuted}" HorizontalTextAlignment="Center" />
+                    <Button 
+                        Text="Retry Loading" 
+                        Command="{Binding LoadDataCommand}" 
+                        CommandParameter="{x:Boolean True}"
+                        Style="{StaticResource OutlineEcoButton}"
+                        HeightRequest="36"
+                        HorizontalOptions="Center" />
+                </VerticalStackLayout>
+
+                <!-- Featured Stays -->
+                <VerticalStackLayout Spacing="10" IsVisible="{Binding IsNotBusy}">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label 
+                            Grid.Column="0"
+                            Text="Featured Eco Stays" 
+                            FontSize="18" 
+                            FontAttributes="Bold" 
+                            TextColor="{StaticResource TextDark}" />
+                    </Grid>
+
+                    <CollectionView ItemsSource="{Binding FeaturedStays}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Accommodation">
+                                <components:AccommodationCard>
+                                    <components:AccommodationCard.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}, Path=NavigateToDetailCommand}"
+                                            CommandParameter="{Binding .}" />
+                                    </components:AccommodationCard.GestureRecognizers>
+                                </components:AccommodationCard>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </RefreshView>
+
+</ContentPage>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:EcoStay.Mobile.ViewModels"
+    xmlns:components="clr-namespace:EcoStay.Mobile.Components"
+    xmlns:models="clr-namespace:EcoStay.Mobile.Models"
+    x:Class="EcoStay.Mobile.Views.WishlistPage"
+    x:DataType="viewmodels:WishlistViewModel"
+    Title="Saved Stays">
+
+    <Grid>
+        
+        <!-- Empty State -->
+        <VerticalStackLayout 
+            IsVisible="{Binding HasSavedStays, Converter={x:Static views:ComparePageConverters.InvertedBoolConverter}}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            Spacing="16" 
+            Padding="24">
+            <Label Text="❤️" FontSize="48" HorizontalTextAlignment="Center" />
+            <Label Text="Your Wishlist is Empty" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource TextDark}" HorizontalTextAlignment="Center" />
+            <Label Text="Save verified eco-stays while exploring India to quickly revisit, book, and compare them." FontSize="13" TextColor="{StaticResource TextMuted}" HorizontalTextAlignment="Center" />
+        </VerticalStackLayout>
+
+        <!-- Saved Stays Collection -->
+        <RefreshView 
+            IsRefreshing="{Binding IsRefreshing}" 
+            Command="{Binding LoadWishlistCommand}"
+            IsVisible="{Binding HasSavedStays}">
+            <CollectionView 
+                ItemsSource="{Binding SavedStays}" 
+                Padding="16">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Accommodation">
+                        <components:AccommodationCard>
+                            <components:AccommodationCard.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:WishlistViewModel}}, Path=NavigateToDetailCommand}"
+                                    CommandParameter="{Binding .}" />
+                            </components:AccommodationCard.GestureRecognizers>
+                        </components:AccommodationCard>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+    </Grid>
+
+</ContentPage>

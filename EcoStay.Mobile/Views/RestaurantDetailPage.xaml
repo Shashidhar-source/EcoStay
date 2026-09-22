@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:EcoStay.Mobile.ViewModels"
+    xmlns:components="clr-namespace:EcoStay.Mobile.Components"
+    xmlns:models="clr-namespace:EcoStay.Mobile.Models"
+    x:Class="EcoStay.Mobile.Views.RestaurantDetailPage"
+    x:DataType="viewmodels:RestaurantDetailViewModel"
+    Title="Organic Dining">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="16" Padding="16">
+            
+            <!-- Food Hero Image -->
+            <Border 
+                StrokeShape="RoundRectangle 24"
+                StrokeThickness="0"
+                HeightRequest="220">
+                <Grid>
+                    <Image 
+                        Source="{Binding Restaurant.PrimaryImage}" 
+                        Aspect="AspectFill" 
+                        HeightRequest="220" />
+                    
+                    <Border 
+                        StrokeShape="RoundRectangle 10"
+                        BackgroundColor="#EEFFFFFF"
+                        Padding="8,4"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Start"
+                        Margin="14">
+                        <Label 
+                            Text="{Binding Restaurant.DietBadgeLabel}" 
+                            FontSize="11" 
+                            FontAttributes="Bold" 
+                            TextColor="{StaticResource EcoDark}" />
+                    </Border>
+                </Grid>
+            </Border>
+
+            <!-- Restaurant Details & Info -->
+            <VerticalStackLayout Spacing="6">
+                <Label 
+                    Text="{Binding Restaurant.Name}" 
+                    FontSize="22" 
+                    FontAttributes="Bold" 
+                    TextColor="{StaticResource TextDark}" />
+
+                <Label 
+                    Text="{Binding Restaurant.FormattedCuisine}" 
+                    FontSize="13" 
+                    TextColor="{StaticResource TextMuted}" />
+
+                <Label 
+                    Text="{Binding Restaurant.Address}" 
+                    FontSize="12" 
+                    TextColor="{StaticResource TextBody}" />
+
+                <!-- Affordability and Rating Row -->
+                <Grid ColumnDefinitions="Auto, *, Auto" Margin="0,6,0,0">
+                    <Label 
+                        Grid.Column="0"
+                        Text="{Binding Restaurant.AffordabilityLabel}" 
+                        FontSize="12" 
+                        FontAttributes="Bold" 
+                        TextColor="{StaticResource EcoPrimary}" />
+
+                    <Label 
+                        Grid.Column="2"
+                        Text="{Binding Restaurant.FormattedAverageCost}" 
+                        FontSize="13" 
+                        FontAttributes="Bold" 
+                        TextColor="{StaticResource TextDark}" />
+                </Grid>
+            </VerticalStackLayout>
+
+            <!-- Action Buttons: Directions & Call -->
+            <Grid ColumnDefinitions="*, *" ColumnSpacing="10">
+                <Button 
+                    Grid.Column="0"
+                    Text="🗺️ Map Route" 
+                    Command="{Binding OpenDirectionsCommand}"
+                    Style="{StaticResource OutlineEcoButton}"
+                    HeightRequest="44"
+                    FontSize="12" />
+
+                <Button 
+                    Grid.Column="1"
+                    Text="📞 Call Host" 
+                    Command="{Binding CallRestaurantCommand}"
+                    Style="{StaticResource PrimaryEcoButton}"
+                    HeightRequest="44"
+                    FontSize="12" />
+            </Grid>
+
+            <!-- Categorized Menu -->
+            <VerticalStackLayout Spacing="10" Margin="0,8,0,0">
+                <Label 
+                    Text="Farm-Fresh &amp; Regional Menu" 
+                    FontSize="18" 
+                    FontAttributes="Bold" 
+                    TextColor="{StaticResource TextDark}" />
+
+                <CollectionView ItemsSource="{Binding MenuItems}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:MenuItem">
+                            <components:MenuItemCard />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
